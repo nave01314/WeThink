@@ -1,0 +1,10 @@
+{% if idea %}
+    <ul>
+        <li>ID: {{ idea.id }}</li>
+        <li>Publication Date: {{ idea.pub_date }}</li>
+        <li>Idea: {{ idea.idea_text }}</li>
+        <li>Votes: {{ idea.votes }}</li>
+    </ul>
+{% else %}
+    <p>No idea found.</p>
+{% endif %}
