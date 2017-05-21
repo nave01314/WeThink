@@ -19,6 +19,10 @@ def index(request):
     return render(request, 'ideas/index.html', context)
 
 
+def profile(request):
+    return render(request, 'ideas/profile.html')
+
+
 def search_form(request):
     return render(request, 'ideas/search_form.html')
 
