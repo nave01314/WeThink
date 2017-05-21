@@ -7,7 +7,8 @@ class IdeaTag(models.Model):
         return self.tag_text
 
 class Idea(models.Model):
-    idea_text = models.CharField(max_length=200)
+    idea_text = models.CharField(max_length=50)
+    idea_details = models.CharField(max_length=1000)
     pub_date = models.DateTimeField('date published')
     votes = models.IntegerField(default=0)
     tags = models.ManyToManyField(IdeaTag)

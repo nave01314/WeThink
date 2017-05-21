@@ -25,7 +25,11 @@ def profile(request):
 
 def submit_idea(request):
     if 'i' in request.POST:
-        i = Idea(idea_text=request.POST['i'], pub_date=timezone.now())
+        if 'd' in request.POST:
+            d = request.POST['d']
+            i = Idea(idea_text=request.POST['i'], pub_date=timezone.now(), idea_details = d)
+        else:
+            i = Idea(idea_text=request.POST['i'], pub_date=timezone.now())
         i.save()
         if 't' in request.POST:
             t = IdeaTag(tag_text=request.POST['t'])

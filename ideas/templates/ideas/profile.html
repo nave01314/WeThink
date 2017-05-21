@@ -36,11 +36,13 @@
 
 
     <h1 style="padding-left:20px">Profile</h1>
-    <h4 style="padding-left:30px">Thought: </h4>
     <form action="/ideas/submit-idea/" method="post" style="padding-left:30px">
         {% csrf_token %}
+        <h4>Thought: </h4>
         <input type="text" name="i" placeholder="Idea" class="form-control mr-sm-2">
-        <h5 style="padding-left:30px">Tags: </h5>
+        <h5>Details: </h5>
+        <textarea type="text" name="d" placeholder="Details" class="form-control"></textarea>
+        <h5>Tags: </h5>
         <input type="text" name="t" placeholder="Tags" class="form-control mr-sm-2">
         <input type="submit" value="Submit Idea!" style="margin-top:10px">
     </form>
