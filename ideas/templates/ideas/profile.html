@@ -20,7 +20,7 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="/ideas/index">Feed</a></li>
-                    <li><a href="/ideas/mythoughts">Profile</a></li>
+                    <li><a href="/ideas/profile">Profile</a></li>
                 </ul>
                 <form class="form-inline navbar-right my-2 my-lg-0", style="margin:10px", action="/ideas/search/", method="get">
                     <input class="form-control" type="text" name="q" placeholder="Search" aria-label="Search">
@@ -35,13 +35,10 @@
         <h1 style="padding-left:20px">Profile</h1>
         <h4 style="padding-left:30px">Thought: </h4>
         <form action="/ideas/submit_idea/" method="post" style="padding-left:30px">
-            {% csrf_token %}
-            <input type="text" name="e" placeholder="Thought" class="form-control mr-sm-2">
-        </form>
-        <h5 style="padding-left:30px">Tags: </h5>
-        <form action="/ideas/submit_idea/" method="post" style="padding-left:30px">
-            {% csrf_token %}
-            <input type="text" name="e" placeholder="Tags" class="form-control mr-sm-2">
+         {% csrf_token %}
+            <input type="text" name="i" placeholder="Idea" class="form-control mr-sm-2">
+            <h5 style="padding-left:30px">Tags: </h5>
+            <input type="text" name="t" placeholder="Tags" class="form-control mr-sm-2">
             <input type="submit" value="Submit Idea!" style="margin-top:10px">
         </form>
 
