@@ -29,14 +29,16 @@ def search(request):
     for r in latest_idea_list:
         if request.GET('q') in r.tags:
             relevant_idea_list.append(r)
-        
-    context = {
-        'relevant_idea_list': relevant_idea_list
-    }
+
     if 'q' in request.GET:
         message = 'You searched for: %r' % request.GET['q']
     else:
         message = 'You submitted an empty form.'
+                
+    context = {
+        'message': message,
+        'relevant_idea_list': relevant_idea_list
+    }
     return HttpResponse(message)
 
 
