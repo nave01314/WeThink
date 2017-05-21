@@ -10,7 +10,7 @@ from .models import IdeaTag
 
 def index(request):
     try:
-        latest_idea_list = Idea.objects.order_by('-pub_date')[:5]
+        latest_idea_list = Idea.objects.order_by('-pub_date')[:10]
     except Idea.DoesNotExist:
         raise Http404("No ideas could be found.")
     
