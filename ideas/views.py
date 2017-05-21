@@ -18,6 +18,10 @@ def index(request):
     return HttpResponse(render(request, 'ideas/index.html', context))
 
 
+def search(request):
+    return HttpResponse(render(request, 'ideas/search.html'))
+
+
 def detail(request, idea_id):
     idea = get_object_or_404(Idea, id=idea_id)
     display_tags = ', '.join([t.IdeaTag for t in idea.tags])
