@@ -24,7 +24,15 @@ def search_form(request):
 
 
 def search(request):
-    idea_list = Idea.objects.order_by('tags')
+    relevant_idea_list = []
+    latest_idea_list = Idea.objects.order_by('-pub_date')[:5]
+    for r in latest_idea_list:
+        if request.GET('q') in r.tags:
+            relevant_idea_list.append(r)
+        
+    context = {
+        'relevant_idea_list': relevant_idea_list
+    }
     if 'q' in request.GET:
         message = 'You searched for: %r' % request.GET['q']
     else:
