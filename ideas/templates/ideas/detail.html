@@ -37,7 +37,11 @@
                 <div style="text-align:center">
                     <h1>{{  idea  }}</h1>
                     <p>Published on: {{ idea.pub_date }}</p>
-                    <p>Tags: {{ display_tags }}</p>
+                    <p>Tags:
+                    {% for t in display_tags %}
+                        {{ t.tag_text }}, 
+                    {% endfor %}
+                     </p>
                     <p>Votes: {{ idea.votes }}</p>
                 </div>
             </div>
