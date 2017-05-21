@@ -26,8 +26,8 @@
                 <li><a href="/ideas/profile">Profile</a></li>
 
             </ul>
-            <form class="form-inline navbar-right my-2 my-lg-0" , style="margin:10px">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <form class="form-inline navbar-right my-2 my-lg-0" , style="margin:10px", action="/ideas/search/", method="get">
+                <input class="form-control" type="text" name="q" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="addItem();">Search</button>
             </form>
         </div>
@@ -62,7 +62,7 @@
                             <h3 class="panel-title ">{{ idea.idea_text }}</h3>
                         </div>
                         <div class="panel-body ">
-                            {% for tag in idea.tags %} {{tag}}, {% endfor %}
+                            {{ idea.tags }}
                             <button type="button" id="btnSave" class="btn btn-default pull-right" onclick="alert('Thanks for voting!');">Vote</button>
                         </div>
                     </div>

@@ -24,30 +24,30 @@ def profile(request):
     return render(request, 'ideas/profile.html')
 
 def submit_idea(request):
-    if 'e' in request.POST:
-        i = Idea(idea_text=request.POST['e'], pub_date=timezone.now())
+    if 'i' in request.POST:
+        i = Idea(idea_text=request.POST['i'], pub_date=timezone.now())
         i.save()
+        if 't' in request.POST:
+            t = IdeaTag(tag_text=request.POST['t'])
+            t.save()
+            i.tags.add(t)
+    i.save()
     return render(request, 'ideas/profile.html')
-
 
 def search_form(request):
     return render(request, 'ideas/search_form.html')
 
 
 def search(request):
-    relevant_idea_list = []
-    latest_idea_list = Idea.objects.order_by('-pub_date')[:5] 
     if 'q' in request.GET:
         message = 'You searched for: %r' % request.GET['q']
-        for r in latest_idea_list:
-            if request.GET['q'] in r.tags:
-                relevant_idea_list.append(r)
+        idea_list = Idea.objects.filter(tags__tag_text__startswith=request.GET['q'])
     else:
         message = 'You submitted an empty form.'
                 
     context = {
         'message': message,
-        'relevant_idea_list': relevant_idea_list
+        'relevant_idea_list': idea_list
     }
     return render(request, 'ideas/search_form.html', context)
 
