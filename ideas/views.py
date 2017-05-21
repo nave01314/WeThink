@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import Http404
 from django.http import HttpResponse
-
+from django.utils import timezone
 from django.template import loader
 
 from .models import Idea
@@ -16,7 +16,17 @@ def index(request):
     context = {
         'latest_idea_list': latest_idea_list,
     }
-    return HttpResponse(render(request, 'ideas/index.html', context))
+    return render(request, 'ideas/index.html', context)
+
+
+def profile(request):
+    return render(request, 'ideas/profile.html')
+
+def submit_idea(request):
+    if 'e' in request.POST:
+        i = Idea(idea_text=request.POST['e'], pub_date=timezone.now())
+        i.save()
+    return render(request, 'ideas/profile.html')
 
 
 def search_form(request):
@@ -24,12 +34,21 @@ def search_form(request):
 
 
 def search(request):
-    idea_list = Idea.objects.order_by('tags')
+    relevant_idea_list = []
+    latest_idea_list = Idea.objects.order_by('-pub_date')[:5] 
     if 'q' in request.GET:
         message = 'You searched for: %r' % request.GET['q']
+        for r in latest_idea_list:
+            if request.GET['q'] in r.tags:
+                relevant_idea_list.append(r)
     else:
         message = 'You submitted an empty form.'
-    return HttpResponse(message)
+                
+    context = {
+        'message': message,
+        'relevant_idea_list': relevant_idea_list
+    }
+    return render(request, 'ideas/search_form.html', context)
 
 
 def detail(request, idea_id):
@@ -38,5 +57,5 @@ def detail(request, idea_id):
     context = {
         'idea': idea,
     }
-    return HttpResponse(render(request, 'ideas/detail.html', context))
+    return render(request, 'ideas/detail.html', context)
 

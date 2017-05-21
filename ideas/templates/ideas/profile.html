@@ -40,6 +40,12 @@
         <input class="form-control mr-sm-2" type="text" placeholder="Tags" aria-label="Tags">
 
     <div class="container">
+        <form action="/ideas/submit_idea/" method="post">
+            {% csrf_token %}
+            <input type="text" name="e">
+            <input type="submit" value="Submit Idea!">
+        </form>
+
       <div class="row row-offcanvas row-offcanvas-right">
         <script>
           function addItem() {
