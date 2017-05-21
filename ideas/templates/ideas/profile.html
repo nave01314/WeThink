@@ -34,15 +34,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jqueery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
     <h1 style="padding-left:20px">Profile</h1>
     <h4 style="padding-left:30px">Thought: </h4>
-    <form action="/ideas/submit_idea/" method="post" style="padding-left:30px">
+    <form action="/ideas/submit-idea/" method="post" style="padding-left:30px">
         {% csrf_token %}
-        <input type="text" name="i" placeholder="Thought" class="form-control mr-sm-2">
-    </form>
-    <h5 style="padding-left:30px">Tags: </h5>
-    <form action="/ideas/submit_idea/" method="post" style="padding-left:30px">
-        {% csrf_token %}
+        <input type="text" name="i" placeholder="Idea" class="form-control mr-sm-2">
+        <h5 style="padding-left:30px">Tags: </h5>
         <input type="text" name="t" placeholder="Tags" class="form-control mr-sm-2">
         <input type="submit" value="Submit Idea!" style="margin-top:10px">
     </form>

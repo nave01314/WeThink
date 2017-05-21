@@ -31,10 +31,8 @@ def submit_idea(request):
             t = IdeaTag(tag_text=request.POST['t'])
             t.save()
             i.tags.add(t)
-        i.save()
-    
+    i.save()
     return render(request, 'ideas/profile.html')
-    
 
 def search_form(request):
     return render(request, 'ideas/search_form.html')
@@ -56,7 +54,7 @@ def search(request):
 
 def detail(request, idea_id):
     idea = get_object_or_404(Idea, id=idea_id)
-    display_tags = ', '.join([t for t in idea.tags])
+    display_tags = idea.tags.all()
     context = {
         'idea': idea,
         'display_tags': display_tags
