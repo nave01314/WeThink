@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.template import loader
 
 from .models import Idea
+from .models import IdeaTag
 
 
 def index(request):
@@ -15,11 +16,33 @@ def index(request):
     context = {
         'latest_idea_list': latest_idea_list,
     }
-    return HttpResponse(render(request, 'ideas/index.html', context))
+    return render(request, 'ideas/index.html', context)
+
+
+def profile(request):
+    return render(request, 'ideas/profile.html')
+
+
+def search_form(request):
+    return render(request, 'ideas/search_form.html')
 
 
 def search(request):
-    return HttpResponse(render(request, 'ideas/search.html'))
+    relevant_idea_list = []
+    latest_idea_list = Idea.objects.order_by('-pub_date')[:5] 
+    if 'q' in request.GET:
+        message = 'You searched for: %r' % request.GET['q']
+        for r in latest_idea_list:
+            if request.GET['q'] in r.tags:
+                relevant_idea_list.append(r)
+    else:
+        message = 'You submitted an empty form.'
+                
+    context = {
+        'message': message,
+        'relevant_idea_list': relevant_idea_list
+    }
+    return render(request, 'ideas/search_form.html', context)
 
 
 def detail(request, idea_id):
@@ -28,5 +51,5 @@ def detail(request, idea_id):
     context = {
         'idea': idea,
     }
-    return HttpResponse(render(request, 'ideas/detail.html', context))
+    return render(request, 'ideas/detail.html', context)
 
