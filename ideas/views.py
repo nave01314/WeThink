@@ -16,7 +16,7 @@ def index(request):
     context = {
         'latest_idea_list': latest_idea_list,
     }
-    return HttpResponse(render(request, 'ideas/index.html', context))
+    return render(request, 'ideas/index.html', context)
 
 
 def search_form(request):
@@ -25,13 +25,12 @@ def search_form(request):
 
 def search(request):
     relevant_idea_list = []
-    latest_idea_list = Idea.objects.order_by('-pub_date')[:5]
-    for r in latest_idea_list:
-        if request.GET('q') in r.tags:
-            relevant_idea_list.append(r)
-
+    latest_idea_list = Idea.objects.order_by('-pub_date')[:5] 
     if 'q' in request.GET:
         message = 'You searched for: %r' % request.GET['q']
+        for r in latest_idea_list:
+            if request.GET['q'] in r.tags:
+                relevant_idea_list.append(r)
     else:
         message = 'You submitted an empty form.'
                 
@@ -39,7 +38,7 @@ def search(request):
         'message': message,
         'relevant_idea_list': relevant_idea_list
     }
-    return HttpResponse(message)
+    return render(request, 'ideas/search_form.html', context)
 
 
 def detail(request, idea_id):
@@ -48,5 +47,5 @@ def detail(request, idea_id):
     context = {
         'idea': idea,
     }
-    return HttpResponse(render(request, 'ideas/detail.html', context))
+    return render(request, 'ideas/detail.html', context)
 
