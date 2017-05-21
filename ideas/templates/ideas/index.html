@@ -33,8 +33,12 @@
         </div>
     </nav>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jqueery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+
+
 
     <div class="container">
         <div class="row row-offcanvas row-offcanvas-right">
@@ -64,7 +68,7 @@
                         <div class="panel-body " style="min-height: 100px">
                             {% for t in idea.tags.all %}
                             <p>{{ t }} </p> {% endfor %}
-                            <button type="button" id="btnSave" class="btn btn-default pull-right" onclick="alert('Thanks for voting!');">Vote</button>
+                            <button type="button" id="voteButton" class="btn btn-default pull-right" onclick="addVote('{{ idea.id }}');">{{ idea.votes }} Vote</button>
                         </div>
                     </div>
                 </div>
@@ -74,6 +78,37 @@
         {% else %}
         <p>No ideas are available.</p>
         {% endif %}
+
+        <script>
+            var csrftoken = $.cookie('csrftoken');
+
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+
+            function addVote(id) {
+
+
+
+                $.ajax({
+                    url: "/ideas/upvote-idea/",
+                    type: "POST",
+                    data: {
+                        'value': id
+                    },
+                    success: function(response) {},
+                });
+            }
+        </script>
 
         <hr>
         <footer>

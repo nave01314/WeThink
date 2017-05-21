@@ -34,6 +34,14 @@ def submit_idea(request):
     i.save()
     return render(request, 'ideas/profile.html')
 
+def upvote_idea(request):
+    value=request.POST.get("value")
+    idea = get_object_or_404(Idea, id=int(value))
+
+    idea.votes = idea.votes + 1
+    idea.save()
+    return render(request, 'ideas/index.html')
+
 def search_form(request):
     return render(request, 'ideas/search_form.html')
 
