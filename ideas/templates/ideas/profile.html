@@ -1,70 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatable">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>WeThink: My Thoughts</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatable">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-        <link href="youthink.css" rel="stylesheet">
-    </head>
+    <title>WeThink: My Thoughts</title>
 
-    <body>
-        <!--Navbar-->
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <h4 class="navbar-text" href="#">WeThink</h1>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="/ideas/index">Feed</a></li>
-                    <li><a href="/ideas/mythoughts">Profile</a></li>
-                </ul>
-                <form class="form-inline navbar-right my-2 my-lg-0", style="margin:10px", action="/ideas/search/", method="get">
-                    <input class="form-control" type="text" name="q" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="addItem();">Search</button>
-                </form>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="youthink.css" rel="stylesheet">
+</head>
+
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h4 class="navbar-text" href="#">WeThink</h1>
             </div>
-        </nav>       
- 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jqueery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <ul class="nav navbar-nav">
+                <li><a href="/ideas/index">Feed</a></li>
+                <li><a>Profile</a></li>
+            </ul>
+            <form class="form-inline navbar-right my-2 my-lg-0" , style="margin:10px" , action="/ideas/search/" , method="get">
+                <input class="form-control" type="text" name="q" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="addItem();">Search</button>
+            </form>
+        </div>
+    </nav>
 
-        <h1 style="padding-left:20px">Profile</h1>
-        <h4 style="padding-left:30px">Thought: </h4>
-        <form action="/ideas/submit_idea/" method="post" style="padding-left:30px">
-            {% csrf_token %}
-            <input type="text" name="e" placeholder="Thought" class="form-control mr-sm-2">
-        </form>
-        <h5 style="padding-left:30px">Tags: </h5>
-        <form action="/ideas/submit_idea/" method="post" style="padding-left:30px">
-            {% csrf_token %}
-            <input type="text" name="e" placeholder="Tags" class="form-control mr-sm-2">
-            <input type="submit" value="Submit Idea!" style="margin-top:10px">
-        </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jqueery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <h1 style="padding-left:20px">Profile</h1>
+    <h4 style="padding-left:30px">Thought: </h4>
+    <form action="/ideas/submit_idea/" method="post" style="padding-left:30px">
+        {% csrf_token %}
+        <input type="text" name="e" placeholder="Thought" class="form-control mr-sm-2">
+    </form>
+    <h5 style="padding-left:30px">Tags: </h5>
+    <form action="/ideas/submit_idea/" method="post" style="padding-left:30px">
+        {% csrf_token %}
+        <input type="text" name="e" placeholder="Tags" class="form-control mr-sm-2">
+        <input type="submit" value="Submit Idea!" style="margin-top:10px">
+    </form>
 
     <div class="container">
-      <div class="row row-offcanvas row-offcanvas-right">
-        <script>
-          function addItem() {
-            var newDiv = document.createElement("div");
-            var input = document.getElementsByClassName("form-control mr-sm-2")[0];
-            var str = "<h1>"+input.value+"</h1>";
-            input.value = "";
-            newDiv.innerHTML = str;
-            newDiv.className = "col-12 col-lg-4";
-            document.getElementsByClassName("row")[0].appendChild(newDiv);
-          }
-        </script>
-      </div><!--/row-->
-      <hr>
-      <footer>
-        <p>&copy; BreadStar</p>
-      </footer>
-    </div><!--/.container-->
-    
-    </body>
+        <div class="row row-offcanvas row-offcanvas-right">
+            <script>
+                function addItem() {
+                    var newDiv = document.createElement("div");
+                    var input = document.getElementsByClassName("form-control mr-sm-2")[0];
+                    var str = "<h1>" + input.value + "</h1>";
+                    input.value = "";
+                    newDiv.innerHTML = str;
+                    newDiv.className = "col-12 col-lg-4";
+                    document.getElementsByClassName("row")[0].appendChild(newDiv);
+                }
+            </script>
+        </div>
+        <!--/row-->
+        <hr>
+        <footer>
+            <p>&copy; BreadStar</p>
+        </footer>
+    </div>
+    <!--/.container-->
+
+</body>
 
 </html>
