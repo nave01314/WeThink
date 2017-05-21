@@ -59,11 +59,18 @@
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                     <div class="panel panel-default">
                         <div class=" panel-heading ">
-                            <h3 class="panel-title ">{{ idea.idea_text }}</h3>
+                            <a href="/ideas/{{ idea.id }}/" >
+                                <h3 class="panel-title ">{{ idea.idea_text }}</h3>
+                            </a>
                         </div>
                         <div class="panel-body " style="min-height: 100px">
+                            <p>
+                            Tags:
                             {% for t in idea.tags.all %}
-                            <p>{{ t }} </p> {% endfor %}
+                            {{ t }} {% endfor %}
+                            </p>
+                            <p>Published on: {{ idea.pub_date }}</p>
+                            <p>Votes: {{ idea.votes }}</p>
                             <button type="button" id="btnSave" class="btn btn-default pull-right" onclick="alert('Thanks for voting!');">Vote</button>
                         </div>
                     </div>
