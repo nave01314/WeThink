@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.template import loader
 
 from .models import Idea
+from .models import IdeaTag
 
 
 def index(request):
@@ -18,8 +19,17 @@ def index(request):
     return HttpResponse(render(request, 'ideas/index.html', context))
 
 
+def search_form(request):
+    return render(request, 'ideas/search_form.html')
+
+
 def search(request):
-    return HttpResponse(render(request, 'ideas/search.html'))
+    idea_list = Idea.objects.order_by('tags')
+    if 'q' in request.GET:
+        message = 'You searched for: %r' % request.GET['q']
+    else:
+        message = 'You submitted an empty form.'
+    return HttpResponse(message)
 
 
 def detail(request, idea_id):
