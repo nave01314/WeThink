@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatable">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>You Think: My Thoughts</title>
+        <title>WeThink: My Thoughts</title>
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link href="youthink.css" rel="stylesheet">
@@ -16,20 +16,14 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <h4 class="navbar-text" href="#">You Think</h1>
+                    <h4 class="navbar-text" href="#">WeThink</h1>
                 </div>
                 <ul class="nav navbar-nav">
-<<<<<<< HEAD
-                    <li><a href="index">Feed</a></li>
-                    <li><a href="mythoughts">My Thoughts</a></li>
-=======
                     <li><a href="/ideas/index">Feed</a></li>
                     <li><a href="/ideas/mythoughts">My Thoughts</a></li>
->>>>>>> a76fd632ae18c0d72fdbe998ee2ff0a0db5dca52
-                    <li><a href="#">Explore</a></li>
                 </ul>
-                <form class="form-inline navbar-right my-2 my-lg-0", style="margin:10px">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <form class="form-inline navbar-right my-2 my-lg-0", style="margin:10px", action="/ideas/search/", method="get">
+                    <input class="form-control" type="text" name="q" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="addItem();">Search</button>
                 </form>
             </div>
