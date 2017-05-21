@@ -37,6 +37,12 @@
         <button class="btn btn-outline-success my-2 my-sm-0" onclick="" style="margin:auto; display:block">I just had a thought!</button>
 
     <div class="container">
+        <form action="/ideas/submit_idea/" method="post">
+            {% csrf_token %}
+            <input type="text" name="e">
+            <input type="submit" value="Submit Idea!">
+        </form>
+
       <div class="row row-offcanvas row-offcanvas-right">
         <script>
           function addItem() {

@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import Http404
 from django.http import HttpResponse
-
+from django.utils import timezone
 from django.template import loader
 
 from .models import Idea
@@ -20,6 +20,12 @@ def index(request):
 
 
 def profile(request):
+    return render(request, 'ideas/profile.html')
+
+def submit_idea(request):
+    if 'e' in request.POST:
+        i = Idea(idea_text=request.POST['e'], pub_date=timezone.now())
+        i.save()
     return render(request, 'ideas/profile.html')
 
 
