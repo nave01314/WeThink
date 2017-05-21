@@ -20,7 +20,7 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="/ideas/index">Feed</a></li>
-                    <li><a href="/ideas/mythoughts">My Thoughts</a></li>
+                    <li><a href="/ideas/mythoughts">Profile</a></li>
                 </ul>
                 <form class="form-inline navbar-right my-2 my-lg-0", style="margin:10px", action="/ideas/search/", method="get">
                     <input class="form-control" type="text" name="q" placeholder="Search" aria-label="Search">
@@ -32,19 +32,20 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jqueery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        <h1 style="padding-left:20px">My Thoughts</h1>
-        <h4>Thought: </h4>
-        <input class="form-control mr-sm-2" type="text" placeholder="Thought" aria-label="Thought">
-        <h5>Tags: </h5>
-        <input class="form-control mr-sm-2" type="text" placeholder="Tags" aria-label="Tags">
-
-    <div class="container">
-        <form action="/ideas/submit_idea/" method="post">
+        <h1 style="padding-left:20px">Profile</h1>
+        <h4 style="padding-left:30px">Thought: </h4>
+        <form action="/ideas/submit_idea/" method="post" style="padding-left:30px">
             {% csrf_token %}
-            <input type="text" name="e">
-            <input type="submit" value="Submit Idea!">
+            <input type="text" name="e" placeholder="Thought" class="form-control mr-sm-2">
+        </form>
+        <h5 style="padding-left:30px">Tags: </h5>
+        <form action="/ideas/submit_idea/" method="post" style="padding-left:30px">
+            {% csrf_token %}
+            <input type="text" name="e" placeholder="Tags" class="form-control mr-sm-2">
+            <input type="submit" value="Submit Idea!" style="margin-top:10px">
         </form>
 
+    <div class="container">
       <div class="row row-offcanvas row-offcanvas-right">
         <script>
           function addItem() {
