@@ -53,9 +53,10 @@ def search(request):
 
 def detail(request, idea_id):
     idea = get_object_or_404(Idea, id=idea_id)
-    display_tags = ', '.join([t.IdeaTag for t in idea.tags])
+    display_tags = ', '.join([t for t in idea.tags])
     context = {
         'idea': idea,
+        'display_tags': display_tags
     }
     return render(request, 'ideas/detail.html', context)
 
