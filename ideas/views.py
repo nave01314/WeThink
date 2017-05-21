@@ -13,6 +13,7 @@ def index(request):
         latest_idea_list = Idea.objects.order_by('-pub_date')[:5]
     except Idea.DoesNotExist:
         raise Http404("No ideas could be found.")
+    
     context = {
         'latest_idea_list': latest_idea_list,
     }
