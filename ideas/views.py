@@ -1,14 +1,17 @@
-from django.shortcuts import render
-
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
 from django.http import Http404
+from django.http import HttpResponse
+
 from django.template import loader
 
 from .models import Idea
 
 
 def index(request):
-    latest_idea_list = Idea.objects.order_by('-pub_date')[:5]
+    try:
+        latest_idea_list = Idea.objects.order_by('-pub_date')[:5]
+    except Idea.DoesNotExist:
+        raise Http404("No ideas could be found.")
     context = {
         'latest_idea_list': latest_idea_list,
     }
@@ -16,11 +19,8 @@ def index(request):
 
 
 def detail(request, idea_id):
-    try:
-        idea = Idea.objects.get(id=idea_id)
-    except Idea.DoesNotExist:
-        raise Http404("Idea does not exist")
-
+    idea = get_object_or_404(Idea, id=idea_id)
+    display_tags = ', '.join([t.IdeaTag for t in idea.tags])
     context = {
         'idea': idea,
     }
